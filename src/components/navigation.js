@@ -43,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             background: "#FFFFFF",
             color: '#000000',
-         },
+        },
     },
     toolbarLink: {
         '&:hover': {
-            textDecoration:'none',
-         },
-        
+            textDecoration: 'none',
+        },
+
     },
     drawerPaper: {
         position: 'relative',
@@ -103,18 +103,21 @@ export default function Navigation(props) {
                     <nav className={classes.iconBar}>
                         {sections.map((section) => (
                             <div className={classes.link} key={section.title}>
-                            <Link
-                                color="inherit"
-                                variant="body2"
-                                href={section.url}
-                                className={classes.toolbarLink}
-                            >
-                                {section.title}
-                            </Link>
+                                <Link
+                                    color="inherit"
+                                    variant="body2"
+                                    href={section.url}
+                                    className={classes.toolbarLink}
+                                >
+                                    {section.title}
+                                </Link>
                             </div>
                         ))}
                     </nav>
-                    <Switch checked={checked} onChange={() => { handleCheck() }} style={{ color: theme.palette.secondary.icons }} />
+                    <Hidden smDown>
+                        <Switch checked={checked} onChange={() => { handleCheck() }} style={{ color: theme.palette.secondary.icons }} />
+                    </Hidden>
+
                 </Toolbar>
             </AppBar>
             {/* Drawer (can be placed anywhere in template) */}
@@ -127,6 +130,12 @@ export default function Navigation(props) {
                 onClick={() => { handleDrawer() }}>
                 <List>
                     <div>
+                        <ListItem button component="a" href="#">
+                            <ListItemIcon>
+                            <Switch checked={checked} onChange={() => { handleCheck() }} style={{ color: theme.palette.secondary.icons }} />
+                            </ListItemIcon>
+                            <ListItemText primary="Switch Theme" />
+                        </ListItem>
                         <ListItem button component="a" href="#">
                             <ListItemIcon>
                                 <MailIcon />
